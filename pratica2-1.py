@@ -32,7 +32,7 @@ class Neuron:
                     output = limiar_activation(weighted_sum) + 1
                 elif self.type == 'adaline':
                     # No caso do adaline, ocorre a discretizacao da ativacao
-                    output = int(linear_activation(weighted_sum) + 1)
+                    output = int(np.round(linear_activation(weighted_sum) + 1))
                 else:
                     print("Error: invalid neuron type")
 
@@ -112,3 +112,6 @@ OBS.: devem ser rodados separadamente
  '''
 # y_hat = perceptron.train(x, y)
 y_hat = adaline.train(x, y)
+
+print(y_hat)
+print(accuracy(y, y_hat))

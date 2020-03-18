@@ -31,7 +31,7 @@ class Neuron:
                 if self.type == 'perceptron':
                     # No caso do perceptron, a discretizacao ocorre direto na ativacao
                     # Com isso, o erro e' calculado ja com o valor discretizado
-                    output = int(sigmoid_activation(weighted_sum) + 1)
+                    output = int(np.round(sigmoid_activation(weighted_sum) + 1))
                 elif self.type == 'adaline':
                     # No caso do adaline, a discretizacao nao ocorre na ativacao
                     output = sigmoid_activation(weighted_sum) + 1
@@ -44,7 +44,7 @@ class Neuron:
                 
                 accumulated_error += abs(output - y[i])
 
-                y_hat.append(int(output))
+                y_hat.append(int(np.round(output)))
             
             # Imprime o erro acumulado dessa iteracao
             print(accumulated_error)
@@ -116,8 +116,8 @@ adaline    = Neuron(df, 'adaline')
 Treina os neuronios e plota a evolucao dos erros
 OBS.: devem ser rodados separadamente
  '''
-# y_hat = perceptron.train(x, y)
-y_hat = adaline.train(x, y)
+y_hat = perceptron.train(x, y)
+# y_hat = adaline.train(x, y)
 
 print(y_hat)
 print(accuracy(y, y_hat))
