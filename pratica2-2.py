@@ -29,10 +29,10 @@ class Neuron:
                 
                 # Realiza a ativacao do resultado
                 if self.type == 'perceptron':
-                    output = limiar_activation(weighted_sum) + 1
+                    output = sigmoid_activation(weighted_sum) + 1
                 elif self.type == 'adaline':
                     # No caso do adaline, ocorre a discretizacao da ativacao
-                    output = int(linear_activation(weighted_sum) + 1)
+                    output = sigmoid_activation(weighted_sum) + 1
                 else:
                     print("Error: invalid neuron type")
 
@@ -76,6 +76,9 @@ def linear_activation(weighted_sum):
 def limiar_activation(weighted_sum):
     return 0 if weighted_sum < 0.5 else 1
 
+def sigmoid_activation(weighted_sum):
+    return 1 / (1 + np.exp(-weighted_sum))
+
 def accuracy(y, y_hat):
     correct = 0
     for i, result in enumerate(y_hat):
@@ -112,3 +115,6 @@ OBS.: devem ser rodados separadamente
  '''
 # y_hat = perceptron.train(x, y)
 y_hat = adaline.train(x, y)
+
+print(y_hat)
+print(accuracy(y, y_hat))
