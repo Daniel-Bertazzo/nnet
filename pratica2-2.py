@@ -29,9 +29,11 @@ class Neuron:
                 
                 # Realiza a ativacao do resultado
                 if self.type == 'perceptron':
-                    output = sigmoid_activation(weighted_sum) + 1
+                    # No caso do perceptron, a discretizacao ocorre direto na ativacao
+                    # Com isso, o erro e' calculado ja com o valor discretizado
+                    output = int(sigmoid_activation(weighted_sum) + 1)
                 elif self.type == 'adaline':
-                    # No caso do adaline, ocorre a discretizacao da ativacao
+                    # No caso do adaline, a discretizacao nao ocorre na ativacao
                     output = sigmoid_activation(weighted_sum) + 1
                 else:
                     print("Error: invalid neuron type")
@@ -41,7 +43,8 @@ class Neuron:
                     self.bias -= eta * (output - y[i])
                 
                 accumulated_error += abs(output - y[i])
-                y_hat.append(output)
+
+                y_hat.append(int(output))
             
             # Imprime o erro acumulado dessa iteracao
             print(accumulated_error)
