@@ -44,7 +44,12 @@ class Neuron:
                 
                 accumulated_error += abs(output - y[i])
 
-                y_hat.append(int(np.round(output)))
+                # Caso seja um neuronio adaline, a discretizacao do resultado ocorre apos
+                # o calculo do erro e atualizacao dos pesos
+                if self.type == 'adaline':
+                    y_hat.append(int(np.round(output)))
+                else:
+                    y_hat.append(output)
             
             # Imprime o erro acumulado dessa iteracao
             print(accumulated_error)
