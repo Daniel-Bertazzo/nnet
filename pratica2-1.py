@@ -16,11 +16,12 @@ class Neuron:
         accumulated_error = 1.0
         
         # Variaveis utilizadas no plot dos erros acumulados
-        errors = []
-        j = 0
+        errors = [] # Erros de cada iteracao de treinamento
+        j = 0       # Numero de iteracoes de treinamento
 
         while accumulated_error > 0.5:
             accumulated_error = 0.0
+            y_hat = []
             # percorre o dataset inteiro (linhas)
             for i in range(x.shape[0]):
                 # Calcula a soma ponderada dos pesos com as entradas
@@ -30,7 +31,8 @@ class Neuron:
                 if self.type == 'perceptron':
                     output = limiar_activation(weighted_sum) + 1
                 elif self.type == 'adaline':
-                    output = linear_activation(weighted_sum) + 1
+                    # No caso do adaline, ocorre a discretizacao da ativacao
+                    output = int(linear_activation(weighted_sum) + 1)
                 else:
                     print("Error: invalid neuron type")
 
@@ -39,6 +41,7 @@ class Neuron:
                     self.bias -= eta * (output - y[i])
                 
                 accumulated_error += abs(output - y[i])
+                y_hat.append(output)
             
             # Imprime o erro acumulado dessa iteracao
             print(accumulated_error)
@@ -53,6 +56,8 @@ class Neuron:
         plt.xlabel('Número de iterações')
         plt.ylabel('Erro acumulado')
         plt.show()
+
+        return y_hat
 
 
         
@@ -70,6 +75,17 @@ def linear_activation(weighted_sum):
 
 def limiar_activation(weighted_sum):
     return 0 if weighted_sum < 0.5 else 1
+
+def accuracy(y, y_hat):
+    correct = 0
+    for i, result in enumerate(y_hat):
+        if result == y[i]:
+            correct += 1
+    
+    return correct / len(y)
+
+
+
 
 # ********************************* ..:: Lendo o arquivo ::.. *********************************
 
@@ -94,5 +110,8 @@ adaline    = Neuron(df, 'adaline')
 Treina os neuronios e plota a evolucao dos erros
 OBS.: devem ser rodados separadamente
  '''
-# perceptron.train(x, y)
-adaline.train(x, y)
+# y_hat = perceptron.train(x, y)
+y_hat = adaline.train(x, y)
+
+print(y_hat)
+print("accuracy = ", accuracy(y, y_hat))
