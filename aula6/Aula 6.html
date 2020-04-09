@@ -13098,7 +13098,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1)-An&#225;lise-dos-datasets-e-escolha-da-m&#233;trica-de-avalia&#231;&#227;o">1) An&#225;lise dos <em>datasets</em> e escolha da m&#233;trica de avalia&#231;&#227;o<a class="anchor-link" href="#1)-An&#225;lise-dos-datasets-e-escolha-da-m&#233;trica-de-avalia&#231;&#227;o">&#182;</a></h3><p>Para começar, faremos uma análise dos <em>datasets</em> para decidir qual métrica usaremos para realizar a avaliação dos modelos.</p>
+<h3 id="1)-An&#225;lise-dos-datasets-e-escolha-da-m&#233;trica-de-avalia&#231;&#227;o">1) An&#225;lise dos <em>datasets</em> e escolha da m&#233;trica de avalia&#231;&#227;o<a class="anchor-link" href="#1)-An&#225;lise-dos-datasets-e-escolha-da-m&#233;trica-de-avalia&#231;&#227;o">&#182;</a></h3><p>Para começar, faremos uma análise dos <em>datasets</em> para decidir qual métrica utilizaremos para realizar a avaliação dos modelos.</p>
 
 </div>
 </div>
@@ -13125,7 +13125,7 @@ div#notebook {
 <span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dados1.csv&quot;</span><span class="p">)</span>
 <span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dados2.csv&quot;</span><span class="p">)</span>
 
-<span class="c1"># Separa os labels (apenas a ultima coluna)</span>
+<span class="c1"># Separa os labels (seleciona apenas a ultima coluna)</span>
 <span class="n">y1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">y2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
@@ -13190,7 +13190,15 @@ Labels do segundo dataset:
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><br><br>
-Agora, podemos realizar um <em>scatter plot</em> dos dados presentes nos <em>datasets</em>, para visualizarmos como essas duas classes se separam no espaço.</p>
+Temos duas classes em cada conjunto de dados: 1 e 2.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Agora, vamos ver quantas <em>features</em> cada conjunto de dados possui:</p>
 
 </div>
 </div>
@@ -13198,6 +13206,58 @@ Agora, podemos realizar um <em>scatter plot</em> dos dados presentes nos <em>dat
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Formato do primeiro dataset:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">============================================================================</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Formato do segundo dataset:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Formato do primeiro dataset:
+(800, 3)
+
+============================================================================
+
+Formato do segundo dataset:
+(800, 3)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br><br>
+É possível perceber que ambos os conjuntos possuem 800 linhas (exemplos) e 3 colunas, sendo que a última representa as classes de cada exemplo. Logo, temos $3-1=2$ <em>features</em>. Com isso, podemos realizar um <em>scatter plot</em> dos <em>datasets</em>, para visualizarmos como os exemplos se separam no espaço.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df1</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;V2&#39;</span><span class="p">)</span>
@@ -13214,13 +13274,13 @@ Agora, podemos realizar um <em>scatter plot</em> dos dados presentes nos <em>dat
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f878712c390&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fbdc1586cd0&gt;</pre>
 </div>
 
 </div>
@@ -13262,7 +13322,7 @@ Agora, podemos realizar um <em>scatter plot</em> dos dados presentes nos <em>dat
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Temos que no primeiro conjunto as classes são linearmente separáveis e no segundo não.</p>
+<p>Perceba que no primeiro conjunto as classes são linearmente separáveis e no segundo não.</p>
 
 </div>
 </div>
@@ -13270,15 +13330,14 @@ Agora, podemos realizar um <em>scatter plot</em> dos dados presentes nos <em>dat
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br>
-Em seguida, verificamos quantos exemplos de cada classe existem em cada conjunto de dados:</p>
+<p>Em seguida, verificamos quantos exemplos de cada classe existem em cada conjunto de dados:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quantidade de exemplos de cada label no dataset 1:&quot;</span><span class="p">)</span>
@@ -13342,7 +13401,7 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -13355,7 +13414,7 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ..:: Primeiro dataset (&quot;dados1.csv&quot;) ::..</span>
@@ -13377,7 +13436,7 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ..:: Segundo dataset (&quot;dados2.csv&quot;) ::..</span>
@@ -13413,7 +13472,7 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
@@ -13426,13 +13485,52 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mlp</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;logistic&#39;</span><span class="p">,</span> <span class="n">learning_rate_init</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Instancia o modelo</span>
+<span class="n">mlp</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;logistic&#39;</span><span class="p">,</span> <span class="n">learning_rate_init</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mlp</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>MLPClassifier(activation=&#39;logistic&#39;, alpha=0.0001, batch_size=&#39;auto&#39;,
+              beta_1=0.9, beta_2=0.999, early_stopping=False, epsilon=1e-08,
+              hidden_layer_sizes=(5, 5), learning_rate=&#39;constant&#39;,
+              learning_rate_init=0.1, max_fun=15000, max_iter=1000,
+              momentum=0.9, n_iter_no_change=10, nesterovs_momentum=True,
+              power_t=0.5, random_state=None, shuffle=True, solver=&#39;adam&#39;,
+              tol=0.0001, validation_fraction=0.1, verbose=False,
+              warm_start=False)
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -13446,7 +13544,7 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
@@ -13459,13 +13557,48 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">svm</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Instancia o modelo</span>
+<span class="n">svm</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">svm</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>SVC(C=1.0, break_ties=False, cache_size=200, class_weight=None, coef0=0.0,
+    decision_function_shape=&#39;ovr&#39;, degree=3, gamma=&#39;scale&#39;, kernel=&#39;rbf&#39;,
+    max_iter=-1, probability=False, random_state=None, shrinking=True,
+    tol=0.001, verbose=False)
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -13486,11 +13619,15 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Primeiro dataset (&quot;dados1.csv&quot;)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ..:: Primeiro dataset (&quot;dados1.csv&quot;) ::..</span>
+
+<span class="c1"># Realiza o treinamento</span>
 <span class="n">mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train1</span><span class="p">,</span> <span class="n">y_train1</span><span class="p">)</span>
+
+<span class="c1"># Faz as predicoes</span>
 <span class="n">y_pred1_mlp</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test1</span><span class="p">)</span>
 </pre></div>
 
@@ -13501,11 +13638,15 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Segundo dataset (&quot;dados2.csv&quot;)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ..:: Segundo dataset (&quot;dados2.csv&quot;) ::..</span>
+
+<span class="c1"># Realiza o treinamento</span>
 <span class="n">mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train2</span><span class="p">,</span> <span class="n">y_train2</span><span class="p">)</span>
+
+<span class="c1"># Faz as predicoes</span>
 <span class="n">y_pred2_mlp</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test2</span><span class="p">)</span>
 </pre></div>
 
@@ -13523,11 +13664,15 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Primeiro dataset (&quot;dados1.csv&quot;)</span>
+
+<span class="c1"># Realiza o treinamento</span>
 <span class="n">svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train1</span><span class="p">,</span> <span class="n">y_train1</span><span class="p">)</span>
+
+<span class="c1"># Faz as predicoes</span>
 <span class="n">y_pred1_svm</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test1</span><span class="p">)</span>
 </pre></div>
 
@@ -13538,11 +13683,15 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Segundo dataset (&quot;dados2.csv&quot;)</span>
+
+<span class="c1"># Realiza o treinamento</span>
 <span class="n">svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train2</span><span class="p">,</span> <span class="n">y_train2</span><span class="p">)</span>
+
+<span class="c1"># Faz as predicoes</span>
 <span class="n">y_pred2_svm</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test2</span><span class="p">)</span>
 </pre></div>
 
@@ -13567,7 +13716,7 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
@@ -13580,11 +13729,12 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Acuracia relacionada ao primeiro dataset (&quot;dados1.csv&quot;)</span>
 <span class="n">acc1_mlp</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test1</span><span class="p">,</span> <span class="n">y_pred1_mlp</span><span class="p">)</span>
+
 <span class="c1"># Acuracia relacionada ao segundo dataset (&quot;dados2.csv&quot;)</span>
 <span class="n">acc2_mlp</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test2</span><span class="p">,</span> <span class="n">y_pred2_mlp</span><span class="p">)</span>
 </pre></div>
@@ -13596,7 +13746,7 @@ Name: V3, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Acuracia da MLP no primeiro dataset:&quot;</span><span class="p">)</span>
@@ -13646,11 +13796,12 @@ Acuracia da MLP no segundo dataset:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Acuracia relacionada ao primeiro dataset (&quot;dados1.csv&quot;)</span>
 <span class="n">acc1_svm</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test1</span><span class="p">,</span> <span class="n">y_pred1_svm</span><span class="p">)</span>
+
 <span class="c1"># Acuracia relacionada ao segundo dataset (&quot;dados2.csv&quot;)</span>
 <span class="n">acc2_svm</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test2</span><span class="p">,</span> <span class="n">y_pred2_svm</span><span class="p">)</span>
 </pre></div>
@@ -13662,7 +13813,7 @@ Acuracia da MLP no segundo dataset:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Acuracia da SVM no primeiro dataset:&quot;</span><span class="p">)</span>
@@ -13713,7 +13864,7 @@ Acuracia da SVM no segundo dataset:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>No final, obtivemos ótimos resultados em ambos os modelos, mesmo sabendo que o conjunto de dados <code>dados2.csv</code> possui exemplos pertencentes a classes <strong>não linearmente separáveis</strong>. Sabemos que uma rede neural (no caso, uma Multilayer Perceptron) é capaz de fazer isso. Porém uma SVM, a princípio, não é e mesmo assim os resultados foram muito bons.
+<p>No final, obtivemos ótimos resultados em ambos os modelos, mesmo sabendo que o <em>dataset</em> <code>dados2.csv</code> possui exemplos pertencentes a classes <strong>não linearmente separáveis</strong>. Sabemos que uma rede neural (no caso, uma Multilayer Perceptron) é capaz de realizar tal separação. Porém uma SVM, a princípio, não é, e mesmo assim os resultados foram muito bons.
 <br>
 Isso ocorre pois a função <code>SVC</code> da biblioteca <code>sklearn</code> utiliza um <em>kernel</em> para mapear o conjunto de dados de entrada para outro espaço (chamado <em>feature space</em>), o qual possui mais dimensões, possibilitando o treinamento e subsequente divisão bem-sucedida dos dados pela SVM linear.</p>
 
