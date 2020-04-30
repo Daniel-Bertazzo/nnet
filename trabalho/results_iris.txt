@@ -1,0 +1,15 @@
+---- MLP - 2 hidden layer of size = (5, 3), activation function = logistic, learning rate = 0.01 ----
+Train accuracy: 0.985 (+/- 0.004)
+Validation accuracy: 0.973 (+/- 0.033)
+Confusion matrix:
+[[50.000, 0.000, 0.000],
+[0.000 ,48.500, 1.500],
+[0.000 ,0.900 ,49.100]]
+
+---- SVM non-linear(soft-margin) - kernel = radial basis function ----
+Train accuracy: 0.974 (+/- 0.004)
+Validation accuracy: 0.973 (+/- 0.020)
+Confusion matrix:
+[[50.000, 0.000, 0.000],
+[0.000 ,48.000, 2.000],
+[0.000 ,1.900 ,48.100]]
